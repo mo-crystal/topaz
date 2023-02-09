@@ -19,3 +19,6 @@
 .vs
 
 data
+
+swagger
+*.zip
