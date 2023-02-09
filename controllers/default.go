@@ -4,11 +4,11 @@ import (
 	beego "github.com/beego/beego/v2/server/web"
 )
 
-type MainController struct {
+type ApiController struct {
 	beego.Controller
 }
 
-func (c *MainController) Get() {
+func (c *ApiController) Get() {
 	c.Data["Website"] = "beego.me"
 	c.Data["Email"] = "astaxie@gmail.com"
 	c.TplName = "index.tpl"
