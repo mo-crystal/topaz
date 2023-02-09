@@ -1,8 +1,9 @@
 package routers
 
 import (
-	beego "github.com/beego/beego/v2/server/web"
 	"topaz/controllers"
+
+	"github.com/beego/beego"
 )
 
 func init() {
