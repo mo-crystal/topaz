@@ -14,6 +14,13 @@ type Response struct {
 	Data interface{} `json:"data"`
 }
 
+// JSON 返回值的构造器，生成 1 个 JSON 响应并返回客户端
+//
+// 使用方法：
+//
+//	response(int) -> {"code": int, "message": "", "data": null}
+//	response(int, string) -> {"code": int, "message": string, "data": null}
+//	response(int, string, obj) -> {"code": int, "message": string, "data": obj}
 func (c *ApiController) response(args ...interface{}) {
 	resp := Response{Code: 0}
 	switch len(args) {
