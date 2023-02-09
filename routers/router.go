@@ -1,3 +1,6 @@
+// @APIVersion 1.0
+// @Title topaz user system
+// @Contact github.com/mo-crystal
 package routers
 
 import (

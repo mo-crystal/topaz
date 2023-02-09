@@ -55,6 +55,10 @@ func CheckNotEmpty(str ...string) bool {
 	return true
 }
 
+// @Title 获取服务器状态
+// @Description 获取服务器状态，确认版本号
+// @Success 200 {object} controllers.Response
+// @router /api/ [get]
 func (c *ApiController) Status() {
 	c.response(0, "v1.0")
 }
