@@ -17,3 +17,9 @@
 .vscode
 .idea
 .vs
+
+data
+
+swagger
+*.zip
+*.tar.gz
