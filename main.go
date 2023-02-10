@@ -1,12 +1,15 @@
 package main
 
 import (
+	"os"
 	"topaz/database"
+	_ "topaz/routers"
 
-	beego "github.com/beego/beego/v2/server/web"
+	"github.com/beego/beego"
 )
 
 func main() {
+	os.Mkdir("data", os.ModePerm)
 	database.Init()
 
 	beego.BConfig.WebConfig.Session.SessionOn = true
