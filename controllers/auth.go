@@ -11,9 +11,12 @@ import (
 )
 
 // POST /api/pull-user
+//
 // 拉取用户信息。
+//
 // 请求中需要指定回调地址。若地址在 target 列表中，并被标记为 Enabled = true，则会将用户信息推送至 CallbackUrl，并且向请求者返回一个标识符。
-// 在请求者处，需接收来自本服务器的 POST 请求。将该 POST 请求中的标识符与本 API 返回的标识符对应，即可得到所拉取的用户信息
+//
+// 在请求者处，需接收来自本服务器的 POST 请求。将该 POST 请求中的标识符与本 API 返回的标识符对应，即可得到所拉取的用户信息。
 func (c *ApiController) PullUser() {
 	callbackUrl := c.Form("CallbackUrl")
 	_uid := c.Form("UserId")
