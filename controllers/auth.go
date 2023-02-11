@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"time"
 	"topaz/database"
+	"topaz/utils"
 )
 
 // POST /api/pull-user
@@ -33,8 +34,8 @@ func (c *ApiController) PullUser() {
 		return
 	}
 
-	timestamp := strconv.Itoa(int(time.Now().UnixNano()))
-	callbackData := Response{Code: 1, Msg: timestamp}
+	identifier := strconv.Itoa(int(time.Now().UnixNano())) + utils.RandString(16)
+	callbackData := Response{Code: 1, Msg: identifier}
 	requestedUser := database.GetUser(uid)
 	if requestedUser != nil {
 		callbackData.Code = 0
@@ -53,5 +54,5 @@ func (c *ApiController) PullUser() {
 		return
 	}
 
-	c.response(0, timestamp)
+	c.response(0, identifier)
 }
