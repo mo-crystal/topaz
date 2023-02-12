@@ -12,12 +12,12 @@ import (
 
 func init() {
 	beego.InsertFilter("*", beego.BeforeRouter, CorsFilter)
-	beego.Router("/api/", &controllers.ApiController{}, "GET:Status")
-	beego.Router("/api/login", &controllers.ApiController{}, "POST:Login")
-	beego.Router("/api/register", &controllers.ApiController{}, "POST:Register")
+	beego.Router("/", &controllers.ApiController{}, "GET:Status")
+	beego.Router("/login", &controllers.ApiController{}, "POST:Login")
+	beego.Router("/register", &controllers.ApiController{}, "POST:Register")
 
 	// auth
-	beego.Router("/api/pull-user", &controllers.ApiController{}, "POST:PullUser")
+	beego.Router("/pull-user", &controllers.ApiController{}, "POST:PullUser")
 }
 
 const (
