@@ -15,6 +15,9 @@ func init() {
 	beego.Router("/api/", &controllers.ApiController{}, "GET:Status")
 	beego.Router("/api/login", &controllers.ApiController{}, "POST:Login")
 	beego.Router("/api/register", &controllers.ApiController{}, "POST:Register")
+
+	// auth
+	beego.Router("/api/pull-user", &controllers.ApiController{}, "POST:PullUser")
 }
 
 const (

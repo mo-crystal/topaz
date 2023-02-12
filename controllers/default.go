@@ -46,6 +46,7 @@ func (c *ApiController) Form(key string) string {
 	return c.Ctx.Request.Form.Get(key)
 }
 
+// 校验任意个 string，其中只要包含空字符串，就会返回 false
 func CheckNotEmpty(str ...string) bool {
 	for _, s := range str {
 		if s == "" {

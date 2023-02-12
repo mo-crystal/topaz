@@ -16,6 +16,7 @@ func Init() {
 	}
 
 	initTable(&User{})
+	initTable(&Target{})
 }
 
 func initTable(i interface{}) {
