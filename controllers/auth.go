@@ -33,9 +33,14 @@ func (c *ApiController) PullUser() {
 		return
 	}
 	user := database.GetUser(userId)
+	if user == nil {
+		c.response(4, "user not exists")
+		return
+	}
+
 	if password != user.Password {
 		user.Mask()
-		c.response(4, "wrong password", user)
+		c.response(0, "wrong password", user)
 		return
 	}
 	user.Password = ""
