@@ -17,6 +17,5 @@ func main() {
 	database.Init()
 
 	beego.BConfig.WebConfig.Session.SessionOn = true
-	fmt.Println("1")
 	beego.Run()
 }
