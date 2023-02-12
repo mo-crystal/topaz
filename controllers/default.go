@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"topaz/utils"
+
 	"github.com/beego/beego"
 )
 
@@ -61,5 +63,5 @@ func CheckNotEmpty(str ...string) bool {
 // @Success 200 {object} controllers.Response
 // @router /api/ [get]
 func (c *ApiController) Status() {
-	c.response(0, "v1.0")
+	c.response(0, "topaz server: "+utils.VERSION)
 }
