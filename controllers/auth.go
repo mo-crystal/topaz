@@ -1,11 +1,7 @@
 package controllers
 
 import (
-	"bytes"
-	"encoding/json"
-	"net/http"
 	"strconv"
-	"time"
 	"topaz/database"
 	"topaz/utils"
 )
@@ -18,44 +14,30 @@ import (
 //
 // 在请求者处，需接收来自本服务器的 POST 请求。将该 POST 请求中的标识符与本 API 返回的标识符对应，即可得到所拉取的用户信息。
 func (c *ApiController) PullUser() {
-	callbackUrl := c.Form("CallbackUrl")
-	_uid := c.Form("UserId")
-	if !CheckNotEmpty(callbackUrl, _uid) {
-		c.response(1, "invalid form data")
+	uid := c.Form("UserId")
+	serverName := c.Form("Server")
+	if serverName == "" {
+		c.response(1, "server is nil")
 		return
 	}
-
-	target := database.FindTarget(callbackUrl)
-	if target == nil {
-		c.response(2, "invalid callback url")
+	server := database.GetServerByName(serverName)
+	password := c.Form("Password")
+	signature := c.Form("Signature")
+	if !utils.SignatureCheck(serverName+uid+password, signature, server.PublicKey) {
+		c.response(2, "access deny")
 		return
 	}
-
-	uid, err := strconv.Atoi(_uid)
+	userId, err := strconv.Atoi(uid)
 	if err != nil {
-		c.response(3, "invalid user id")
+		c.response(3, "illegal user id")
 		return
 	}
-
-	identifier := strconv.Itoa(int(time.Now().UnixNano())) + utils.RandString(16)
-	callbackData := Response{Code: 1, Msg: identifier}
-	requestedUser := database.GetUser(uid)
-	if requestedUser != nil {
-		callbackData.Code = 0
-		callbackData.Data = requestedUser
-	}
-
-	callbackBytes, err := json.Marshal(callbackData)
-	if err != nil {
-		c.response(4, "internal error")
+	user := database.GetUser(userId)
+	if password != user.Password {
+		user.Mask()
+		c.response(4, "wrong password", user)
 		return
 	}
-
-	_, err = http.Post(target.CallbackUrl, "application/json", bytes.NewReader(callbackBytes))
-	if err != nil {
-		c.response(5, "target server error")
-		return
-	}
-
-	c.response(0, identifier)
+	user.Password = ""
+	c.response(0, "success", user)
 }

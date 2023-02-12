@@ -29,3 +29,7 @@ func GetUser(id int) *User {
 func SetUser(user *User) {
 	db.Save(user)
 }
+
+func (u *User) Mask() {
+	u.Password = ""
+}
