@@ -17,7 +17,7 @@ func (c *ApiController) PullUser() {
 	password := c.Form("Password")
 	signature := c.Form("Signature")
 	if !utils.SignatureCheck(serverName+uid+password, signature, server.PublicKey) {
-		c.response(2, "access deny")
+		c.response(2, "access denied")
 		return
 	}
 	userId, err := strconv.Atoi(uid)
