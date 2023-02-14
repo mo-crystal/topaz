@@ -1,13 +1,17 @@
-module topaz
+module github.com/mo-crystal/topaz
 
 go 1.17
 
 require github.com/beego/beego/v2 v2.0.1
 
-require github.com/smartystreets/goconvey v1.6.4
+require (
+	github.com/beego/beego v1.12.11
+	github.com/smartystreets/goconvey v1.6.4
+	gorm.io/driver/sqlite v1.4.4
+	gorm.io/gorm v1.24.0
+)
 
 require (
-	github.com/beego/beego v1.12.11 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.1.1 // indirect
 	github.com/golang/protobuf v1.4.2 // indirect
@@ -35,6 +39,4 @@ require (
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/protobuf v1.23.0 // indirect
 	gopkg.in/yaml.v2 v2.2.8 // indirect
-	gorm.io/driver/sqlite v1.4.4 // indirect
-	gorm.io/gorm v1.24.0 // indirect
 )
